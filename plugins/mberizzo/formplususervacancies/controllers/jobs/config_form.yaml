@@ -1,0 +1,10 @@
+name: Jobs
+form: $/mberizzo/formplususervacancies/models/job/fields.yaml
+modelClass: Mberizzo\FormPlusUserVacancies\Models\Job
+defaultRedirect: mberizzo/formplususervacancies/jobs
+create:
+    redirect: 'mberizzo/formplususervacancies/jobs/update/:id'
+    redirectClose: mberizzo/formplususervacancies/jobs
+update:
+    redirect: mberizzo/formplususervacancies/jobs
+    redirectClose: mberizzo/formplususervacancies/jobs

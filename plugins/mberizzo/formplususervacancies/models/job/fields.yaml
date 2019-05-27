@@ -1,0 +1,10 @@
+fields:
+    title:
+        label: 'mberizzo.formplususervacancies::lang.labels.title'
+        span: full
+        type: text
+    description:
+        label: 'mberizzo.formplususervacancies::lang.labels.description'
+        size: large
+        span: auto
+        type: richeditor

@@ -1,0 +1,8 @@
+{% set job = __SELF__.vacancyDetails %}
+
+<h1>{{ job.title }}</h1>
+{{ job.description|raw }}
+
+{% if user %}
+    <a href="#" class="btn btn-default">Aplicar</a>
+{% endif %}

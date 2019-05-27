@@ -1,0 +1,11 @@
+plugin:
+    name: 'mberizzo.formplususervacancies::lang.plugin.name'
+    description: 'mberizzo.formplususervacancies::lang.plugin.description'
+    author: MBerizzo
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'mberizzo.formplususervacancies::lang.plugin.name'
+        url: mberizzo/formplususervacancies/jobs
+        icon: icon-life-ring
