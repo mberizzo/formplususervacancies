@@ -11,7 +11,28 @@ class JobUser extends Model
 {
 
     /**
+     * @var array Fillable fields
+     */
+    protected $fillable = ['user_id', 'job_id'];
+
+    /**
      * @var string The database table used by the model.
      */
     public $table = 'mberizzo_formplususervacancies_job_user';
+
+    /*
+     * Disable timestamps by default.
+     * Remove this line if timestamps are defined in the database table.
+     */
+    public $timestamps = false;
+
+    public static function boot()
+    {
+        parent::boot();
+
+        // Filling created_at field
+        static::creating(function ($model) {
+            $model->created_at = $model->freshTimestamp();
+        });
+    }
 }

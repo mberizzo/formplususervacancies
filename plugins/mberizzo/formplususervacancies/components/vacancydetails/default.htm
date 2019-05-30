@@ -4,5 +4,25 @@
 {{ job.description|raw }}
 
 {% if user %}
-    <a href="#" class="btn btn-default">Aplicar</a>
+
+    <div id="wrapper-action">
+        {% if not ifUserHasAlreadyApplied %}
+            <a
+                href="#"
+                data-request="{{ __SELF__ }}::onApply"
+                data-request-update="'{{ __SELF__ }}::message': '#wrapper-action'"
+                class="btn btn-default">
+                    Aplicar
+            </a>
+        {% else %}
+            {% partial "@message" %}
+        {% endif %}
+    </div>
+
+{% else %}
+
+    <a href="{{ 'login'|page }}" class="btn btn-default">
+        Aplicar
+    </a>
+
 {% endif %}

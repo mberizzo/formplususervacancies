@@ -2,6 +2,8 @@
 
 use Cms\Classes\ComponentBase;
 use Mberizzo\FormPlusUserVacancies\Models\Job;
+use Mberizzo\FormPlusUserVacancies\Models\JobUser;
+use RainLab\User\Facades\Auth;
 
 class VacancyDetails extends ComponentBase
 {
@@ -30,13 +32,36 @@ class VacancyDetails extends ComponentBase
 
     public function onRun()
     {
-        $slug = $this->property('slug');
-
-        $this->vacancyDetails = $this->page['vacancyDetails'] = $this->getJobDetails($slug);
+        $this->vacancyDetails = $this->page['vacancyDetails'] = $this->getJob();
+        $this->ifUserHasAlreadyApplied = $this->page['ifUserHasAlreadyApplied'] = $this->ifUserHasAlreadyApplied();
     }
 
-    private function getJobDetails($slug)
+    public function onApply()
     {
+        JobUser::firstOrCreate([
+            'job_id' => $this->getJob()->id,
+            'user_id' => Auth::getUser()->id,
+        ]);
+    }
+
+    private function getJob()
+    {
+        $slug = $this->param('slug');
+
         return Job::whereSlug($slug)->firstOrFail();
+    }
+
+    private function ifUserHasAlreadyApplied()
+    {
+        if (! Auth::check()) {
+            return false;
+        }
+
+        $count = JobUser::where([
+            'job_id' => $this->getJob()->id,
+            'user_id' => Auth::getUser()->id,
+        ])->count();
+
+        return $count > 0;
     }
 }
