@@ -26,6 +26,7 @@ class Plugin extends PluginBase
         return [
             'Mberizzo\FormPlusUserVacancies\Components\VacancyList' => 'vacancyList',
             'Mberizzo\FormPlusUserVacancies\Components\VacancyDetails' => 'vacancyDetails',
+            'Mberizzo\FormPlusUserVacancies\Components\FormData' => 'formData',
         ];
     }
 
