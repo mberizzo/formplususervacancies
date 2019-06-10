@@ -1,3 +1,11 @@
-<p>This is the default markup for component FormData</p>
-
-<small>You can delete this file if you want</small>
+{% put scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.22/vue.js"></script>
+<script>
+    new Vue({
+        el: '#curriculum',
+        data: {
+            form_data: {{ formData.data|json_encode|raw }},
+        }
+    })
+</script>
+{% endput %}

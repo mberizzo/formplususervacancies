@@ -3,6 +3,7 @@
 namespace Mberizzo\FormPlusUserVacancies\Components;
 
 use Cms\Classes\ComponentBase;
+use October\Rain\Exception\ApplicationException;
 use RainLab\User\Facades\Auth;
 
 class FormData extends ComponentBase
@@ -20,14 +21,11 @@ class FormData extends ComponentBase
 
     public function onRun()
     {
-        $form = $this->page->renderForm;
+        $user = $this->getUserOrFail();
 
-        if (! $form) {
-            throw new ApplicationException('You must be load any RenatioForm!');
-        }
+        $form = $this->getPageFormOrFail();
 
-        $user = Auth::getUser();
-
+        // The user has a form related
         if (! $user->curriculum) {
             $data = [];
 
@@ -44,23 +42,44 @@ class FormData extends ComponentBase
         }
 
         $formLog = $user->curriculum->log;
-
-        $fields = $formLog->form->fields;
+        $data = $formLog->form_data;
 
         // Rellenar $data con los fields que no han sido completados
         // por el usuario en su cv para que vue no de error de js.
         // @TODO: Aca tb podemos aprovechar para agregarle el v-model dinamicamente a $item
-        $fields->each(function ($item) use (&$formLog) {
+        $form->fields->each(function ($item) use ($formLog, &$data) {
             $names = array_keys($formLog->form_data);
 
             if (! in_array($item->name, $names)) {
-                $formLog->form_data[$item->name] = [
+                $data[$item->name] = [
                     'label' => $item->label,
                     'value' => '',
                 ];
             }
         });
 
-        $this->data = $formLog->form_data;
+        $this->data = $data;
+    }
+
+    private function getUserOrFail()
+    {
+        if (! Auth::check()) {
+            throw new ApplicationException('You must be logged in.');
+        }
+
+        return Auth::getUser();
+    }
+
+    private function getPageFormOrFail()
+    {
+        $renderForm = $this->page->renderForm;
+
+        if (! $renderForm) {
+            throw new ApplicationException(
+                'You must be load some RenatioForm with alias "renderForm".'
+            );
+        }
+
+        return $renderForm->form;
     }
 }
