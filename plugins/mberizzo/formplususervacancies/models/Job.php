@@ -1,6 +1,9 @@
 <?php namespace Mberizzo\FormPlusUserVacancies\Models;
 
+use Mberizzo\FormPlusUserVacancies\Models\Category;
+use Mberizzo\FormPlusUserVacancies\Models\JobUser;
 use Model;
+use RainLab\User\Models\User;
 
 /**
  * Model
@@ -21,6 +24,28 @@ class Job extends Model
      */
     public $timestamps = false;
 
+    public $attachOne = [
+        'image' => 'System\Models\File'
+    ];
+
+    public $belongsTo = [
+        'category' => [
+            Category::class,
+            'key' => 'category_id'
+        ],
+    ];
+
+    public $belongsToMany = [
+        'users' => [
+            User::class,
+            'table' => 'mberizzo_formplususervacancies_job_user',
+        ],
+        'users_count' => [
+            User::class,
+            'count' => true,
+            'table' => 'mberizzo_formplususervacancies_job_user',
+        ],
+    ];
 
     /**
      * @var string The database table used by the model.

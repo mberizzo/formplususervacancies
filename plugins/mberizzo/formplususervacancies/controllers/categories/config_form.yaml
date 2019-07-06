@@ -1,0 +1,10 @@
+name: Categories
+form: $/mberizzo/formplususervacancies/models/category/fields.yaml
+modelClass: Mberizzo\FormPlusUserVacancies\Models\Category
+defaultRedirect: mberizzo/formplususervacancies/categories
+create:
+    redirect: 'mberizzo/formplususervacancies/categories/update/:id'
+    redirectClose: mberizzo/formplususervacancies/categories
+update:
+    redirect: mberizzo/formplususervacancies/categories
+    redirectClose: mberizzo/formplususervacancies/categories

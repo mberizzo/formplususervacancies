@@ -25,6 +25,8 @@ class FormData extends ComponentBase
 
         $form = $this->getPageFormOrFail();
 
+        $this->addJs('assets/js/vue.js');
+
         // The user has a form related
         if (! $user->curriculum) {
             $data = [];

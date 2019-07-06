@@ -1,0 +1,19 @@
+<div id="relationManagePopup" data-request-data="_relation_field: 'product'">
+    <?= Form::open() ?>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="popup">×</button>
+            <h4 class="modal-title">User List</h4>
+        </div>
+
+        <?= $widget->render() ?>
+
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.relation.close')) ?>
+            </button>
+        </div>
+    <?= Form::close() ?>
+</div>

@@ -12,3 +12,12 @@
 1.0.5:
     - 'Created table mberizzo_formplususervacancies_job_user'
     - builder_table_create_mberizzo_formplususervacancies_job_user.php
+1.0.6:
+    - 'Created table mberizzo_formplususervacancies_categories'
+    - builder_table_create_mberizzo_formplususervacancies_categories.php
+1.0.7:
+    - 'Updated table mberizzo_formplususervacancies_jobs'
+    - builder_table_update_mberizzo_formplususervacancies_jobs.php
+1.0.8:
+    - 'Updated table mberizzo_formplususervacancies_jobs'
+    - builder_table_update_mberizzo_formplususervacancies_jobs_2.php

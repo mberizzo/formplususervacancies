@@ -9,3 +9,17 @@ columns:
         type: text
         searchable: true
         sortable: true
+    category:
+        label: 'Category'
+        relation: category
+        valueFrom: name
+        searchable: true
+        sortable: true
+    # users_count:
+    #     label: 'Cant. de Aplicantes'
+    #     relation: users
+    #     useRelationCount: true
+    users:
+        type: partial
+        path: ~/plugins/mberizzo/formplususervacancies/models/users/_btn_trigger_popup_list.htm
+        clickable: false

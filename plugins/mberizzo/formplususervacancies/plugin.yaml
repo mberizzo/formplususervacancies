@@ -4,8 +4,31 @@ plugin:
     author: MBerizzo
     icon: oc-icon-adjust
     homepage: ''
+permissions:
+    mberizzo.jobs:
+        tab: 'Jobs'
+        label: 'Jobs label'
 navigation:
     main-menu-item:
         label: 'mberizzo.formplususervacancies::lang.plugin.name'
         url: mberizzo/formplususervacancies/jobs
         icon: icon-life-ring
+        sideMenu:
+            create_job:
+                label: 'Create Job Offer'
+                url: mberizzo/formplususervacancies/jobs/create
+                icon: icon-plus
+                permissions:
+                    - mberizzo.jobs
+            jobs:
+                label: 'Listado'
+                url: mberizzo/formplususervacancies/jobs
+                icon: icon-th-large
+                permissions:
+                    - mberizzo.jobs
+            categories:
+                label: 'Categorias'
+                url: mberizzo/formplususervacancies/categories
+                icon: icon-th-large
+                permissions:
+                    - mberizzo.jobs

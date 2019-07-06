@@ -1,0 +1,10 @@
+users:
+  label: ' '
+  view:
+    list: $/mberizzo/formplususervacancies/models/job/relation/user_columns.yaml
+    toolbarButtons: false
+    showCheckboxes: false
+  manage:
+    # form: $/mberizzo/formplususervacancies/models/job/relation/user_fields.yaml
+    # list: $/mberizzo/formplususervacancies/models/job/relation/user_columns.yaml
+    recordsPerPage: 10

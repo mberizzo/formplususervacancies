@@ -1,6 +1,7 @@
 <?php namespace Mberizzo\FormPlusUserVacancies;
 
 use Illuminate\Support\Facades\Event;
+use Mberizzo\FormLogsPlus\Controllers\Logs;
 use Mberizzo\FormPlusUserVacancies\Models\Job;
 use Mberizzo\FormPlusUserVacancies\Models\JobUser;
 use Mberizzo\FormPlusUserVacancies\Models\LogUser;
