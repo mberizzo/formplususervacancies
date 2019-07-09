@@ -57,4 +57,10 @@ class Job extends Model
      */
     public $rules = [
     ];
+
+    public function beforeUpdate()
+    {
+        $this->slug = str_slug($this->title);
+        $this->slugAttributes(); // Regenerate slugs if exists
+    }
 }

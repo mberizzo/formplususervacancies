@@ -1,9 +1,4 @@
 columns:
-    id:
-        label: ID
-        type: number
-        searchable: true
-        sortable: true
     title:
         label: 'mberizzo.formplususervacancies::lang.labels.title'
         type: text
@@ -15,6 +10,10 @@ columns:
         valueFrom: name
         searchable: true
         sortable: true
+    tags:
+        label: 'Tags'
+        type: text
+        searchable: true
     # users_count:
     #     label: 'Cant. de Aplicantes'
     #     relation: users
@@ -23,3 +22,4 @@ columns:
         type: partial
         path: ~/plugins/mberizzo/formplususervacancies/models/users/_btn_trigger_popup_list.htm
         clickable: false
+        sortable: false

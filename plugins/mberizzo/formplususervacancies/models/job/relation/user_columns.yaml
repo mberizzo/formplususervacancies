@@ -4,3 +4,14 @@ columns:
         type: text
         searchable: true
         sortable: true
+    created_at:
+        label: 'Fecha'
+        type: text
+        searchable: true
+        sortable: true
+    actions:
+        label: Actions
+        type: partial
+        path: ~/plugins/mberizzo/formplususervacancies/models/users/_btn_open_details.htm
+        clickable: false
+        sortable: false

@@ -4,7 +4,26 @@
         el: '#curriculum',
         data: {
             form_data: {{ formData.data|json_encode|raw }},
-        }
-    })
+        },
+    });
+
+    {% if (formData.files.count) %}
+        $(function() {
+            var mockFile = {};
+            var myDropzone = $('[data-control=multi-file-uploader]').get(0).dropzone;
+            {% for key, file in formData.files %}
+                mockFile[{{ key }}] = {
+                    id: '{{ file.id }}',
+                    name: '{{ file.file_name }}',
+                    size: '{{ file.file_size }}',
+                    path: '{{ file.getLocalPath }}',
+                    thumb: '{{ file.path }}',
+                };
+                myDropzone.options.addedfile.call(myDropzone, mockFile[{{ key }}]);
+                myDropzone.options.thumbnail.call(myDropzone, mockFile[{{ key }}], '{{ file.path }}');
+                myDropzone.emit("success", mockFile[{{ key }}], mockFile[{{ key }}]);
+            {% endfor %}
+        })
+    {% endif %}
 </script>
 {% endput %}

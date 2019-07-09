@@ -41,19 +41,27 @@ class Jobs extends Controller
 
     public function onRelationUsers()
     {
-        # Specify which list configuration file use for this list
+        $jobId = request()->get('jobId');
+
+        // Specify which list configuration file use for this list
         $config = $this->makeConfig('$/mberizzo/formplususervacancies/models/job/relation/user_columns.yaml');
 
-        # Specify the List model
+        // Specify the List model
         $config->model = new User;
 
-        # Here we will actually make the list using Lists Widget
-        $widget = $this->makeWidget('Backend\Widgets\Lists', $config);
+        // Here we will actually make the list using Lists Widget
+        $listWidget = $this->makeWidget('Backend\Widgets\Lists', $config);
+
+        $listWidget->bindEvent('list.extendQueryBefore', function ($query) use ($jobId) {
+            $query->whereHas('jobs', function($q) use ($jobId) {
+                $q->where('job_id', $jobId);
+            });
+        });
 
         # Dont forget to bind the whole thing to the controller
-        $widget->bindToController();
+        $listWidget->bindToController();
 
-        $this->vars['widget'] = $widget;
+        $this->vars['listWidget'] = $listWidget;
 
         return $this->makePartial('user_custom_list');
     }

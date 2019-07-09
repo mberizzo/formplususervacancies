@@ -10,6 +10,7 @@ class FormData extends ComponentBase
 {
 
     public $data;
+    public $files;
 
     public function componentDetails()
     {
@@ -61,6 +62,7 @@ class FormData extends ComponentBase
         });
 
         $this->data = $data;
+        $this->files = $formLog->files;
     }
 
     private function getUserOrFail()

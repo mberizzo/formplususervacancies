@@ -20,11 +20,10 @@ fields:
         # separator: space
 tabs:
     fields:
-        lines:
-            type: partial
-            path: $/mberizzo/formplususervacancies/controllers/jobs/users.htm
-            # tab: 'mberizzo.formplususervacancies::lang.labels.lines'
-            tab: 'Postulantes'
+        # lines:
+        #     type: partial
+        #     path: $/mberizzo/formplususervacancies/controllers/jobs/users.htm
+        #     tab: 'Postulantes'
 secondaryTabs:
     fields:
         image:
