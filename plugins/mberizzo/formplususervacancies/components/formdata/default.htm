@@ -5,6 +5,14 @@
         data: {
             form_data: {{ formData.data|json_encode|raw }},
         },
+        mounted() {
+            let input = document.createElement('input');
+            let domForm = document.forms["{{ this.page.renderForm['formCode'] }}"];
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', 'is_curriculum');
+            input.setAttribute('value', 'true');
+            domForm.appendChild(input);
+        },
     });
 
     {% if (formData.files.count) %}

@@ -20,6 +20,8 @@ class FormData extends ComponentBase
         ];
     }
 
+
+
     public function onRun()
     {
         $user = $this->getUserOrFail();

@@ -33,29 +33,39 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        Event::listen('eloquent.creating: ' . FormLog::class, function ($user) {
+        Event::listen('eloquent.creating: ' . FormLog::class, function ($data) {
+            logger('eloquent.creating');
+
+            // @TODO: Improve this comment or delete it (for now is useful):
             // El user puede estar relacionado con un solo CV,
             // entonces si buscamos en LogUser el id del usuario,
-            // ya tendremos que obtener el log_id y alli actualiazar
-            // los datos del log en vez de eliminar todos, evitando
-            // que se eliminen los logs que no son de este form
-            // y conservando los archivos adjuntos. :) y todos felices.
+            // ya tendremos que obtener el log_id (y tb fijarnos que sea el form de cv
+            // el que nos esta llegando) y alli actualizar los datos del log,
+            // de este modo tambien se conservan los archivos adjuntos.
             // Pero tengo que evitar que se cree un nuevo log (ya que
             // esto se hace en el plugin de renatio)
             $user = Auth::getUser();
             $logUser = LogUser::where('user_id', $user->id)->first();
 
-            // Tengo que actualizar este log y evitar que se
-            // cree uno nuevo. Lets do it!
-            $log = FormLog::find($logUser->log_id);
+            // If the user already has Curriculum saved
+            if ($logUser) {
+                trace_log('If the user already has Curriculum saved');
 
-            // Update data
-            if ($log) {
-                $log->form_id = $log->form->id;
-                $log->form_data = $log->form->getFormData();
-                $log->save(null, post('_session_key'));
+                $log = FormLog::find($logUser->log_id);
 
-                return false;
+                // Detect if the form_id saved (log_user table: $log->form_id) is the curriculum form
+                // So we are detecting if the user is trying to update his curriculum.
+                // If the form_id are diferrent maybe the user is trying to send a contact form or whatever.
+                if ($log->form_id == $data->form_id)) {
+                    $formData = $log->form->getFormData();
+                    $log->form_id = $log->form->id;
+                    $log->form_data = $formData;
+                    $log->save(null, post('_session_key'));
+
+                    trace_log("Updated CV data. log_id: {$log->id}. user_id: {$user->id}. New data: ", $formData);
+
+                    return false; // Stop creation
+                }
             }
         });
 
@@ -79,30 +89,21 @@ class Plugin extends PluginBase
         });
 
         FormLog::extend(function($model) {
-            $model->hasOne['userRel'] = [
-                LogUser::class,
-                'key' => 'log_id',
-            ];
+            $model->bindEvent('model.afterCreate', function() use ($model) {
+                trace_log('model.afterCreate');
 
-            $model->bindEvent('model.afterSave', function() use ($model) {
-                logger('afterSave');
-
-                // 1. Debo intervenir el modelo Renatio\FormBuilder\Models\FormLog
-                // en el metodo afterSave entoces cuando se termine de guardar el log, lo que hacemos es modificar el log_id en nuestra tabla logs_user entonces el user_id siempre va ser el mismo.
-                // 1.A) Verificamos si el user tiene un cv previamente relacionado en la tabla "user_form_logs"
-                // Si es asi, le actualizamos el form_log_id, sino creamos un registro con el id del user y el nuevo de id de form_log_id
-                //
                 $user = Auth::getUser();
 
-                LogUser::updateOrCreate(
-                    ['user_id' => $user->id],
-                    ['log_id' => $model->id]
-                );
+                // If user doenst has Curriculum and we are sending
+                // the CV form so bind user with log
+                if (! $user->curriculum && post('is_curriculum')) {
+                    LogUser::create([
+                        'user_id' => $user->id,
+                        'log_id' => $model->id
+                    ]);
 
-                //
-                // 2. luego deberia eliminar los registros de "renatio_formbuilder_form_logs" que no estan relacionados con nuestra tabla asi todos los registros de renatio_formbuilder_form_logs siempre van a estar relacionados con un user.
-                // @TODO: que pasa si creamos un form de contacto? elimina los registros por el solo hecho que no esten relacionados con un user? eso esta mal. Pero lo que pasa que el formBuilder lo guarda como si fuera un form nuevo y en realidad estamos actualizando
-                FormLog::doesntHave('userRel')->delete();
+                    trace_log("The user #{$user->id} uploaded her curriculum for the first time.");
+                }
             });
         });
     }
