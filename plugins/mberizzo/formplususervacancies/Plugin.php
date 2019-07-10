@@ -56,7 +56,7 @@ class Plugin extends PluginBase
                 // Detect if the form_id saved (log_user table: $log->form_id) is the curriculum form
                 // So we are detecting if the user is trying to update his curriculum.
                 // If the form_id are diferrent maybe the user is trying to send a contact form or whatever.
-                if ($log->form_id == $data->form_id)) {
+                if ($log->form_id == $data->form_id) {
                     $formData = $log->form->getFormData();
                     $log->form_id = $log->form->id;
                     $log->form_data = $formData;
