@@ -17,21 +17,50 @@
 
     {% if (formData.files.count) %}
         $(function() {
-            var mockFile = {};
             var myDropzone = $('[data-control=multi-file-uploader]').get(0).dropzone;
-            {% for key, file in formData.files %}
-                mockFile[{{ key }}] = {
-                    id: '{{ file.id }}',
-                    name: '{{ file.file_name }}',
-                    size: '{{ file.file_size }}',
-                    path: '{{ file.getLocalPath }}',
-                    thumb: '{{ file.path }}',
+            var files = {{ formData.files|raw }};
+            var mockFiles = {};
+
+            myDropzone.on("loadedsavedfile", function(file) {
+                $(file.previewElement).on('click', '.delete', function(event) {
+                    event.stopPropagation();
+                    $preview = $(this).closest('.dz-preview');
+                    $preview.removeClass('dz-success').addClass('dz-removing');
+                    var fileId = $preview.data('id');
+
+                    $.ajax({
+                        url: window.location.href,
+                        type: 'POST',
+                        data: {id: fileId},
+                        headers: {
+                            'X-OCTOBER-REQUEST-HANDLER': 'onRemoveFile',
+                        },
+                    })
+                    .done(function() {
+                        myDropzone.removeFile(file);
+                    })
+                    .fail(function() {
+                        alert('No se pudo eliminar el archivo. Intente nuevamente.');
+                    })
+                    .always(function() {
+                        $preview.addClass('dz-success').removeClass('dz-removing');
+                    });
+                });
+            });
+
+            for (var i = files.length - 1; i >= 0; i--) {
+                mockFiles[i] = {
+                    id: files[i].id,
+                    name: files[i].file_name,
+                    size: files[i].file_size,
+                    thumb: files[i].path,
                 };
-                myDropzone.options.addedfile.call(myDropzone, mockFile[{{ key }}]);
-                myDropzone.options.thumbnail.call(myDropzone, mockFile[{{ key }}], '{{ file.path }}');
-                myDropzone.emit("success", mockFile[{{ key }}], mockFile[{{ key }}]);
-            {% endfor %}
-        })
+
+                myDropzone.emit("addedfile", mockFiles[i]);
+                myDropzone.emit("success", mockFiles[i], mockFiles[i]);
+                myDropzone.emit("loadedsavedfile", mockFiles[i]);
+            }
+        });
     {% endif %}
 </script>
 {% endput %}

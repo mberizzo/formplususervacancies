@@ -49,7 +49,7 @@ class Plugin extends PluginBase
 
             // If the user already has Curriculum saved
             if ($logUser) {
-                trace_log('If the user already has Curriculum saved');
+                trace_log('The user already has Curriculum saved');
 
                 $log = FormLog::find($logUser->log_id);
 

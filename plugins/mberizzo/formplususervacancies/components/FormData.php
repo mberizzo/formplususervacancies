@@ -5,6 +5,7 @@ namespace Mberizzo\FormPlusUserVacancies\Components;
 use Cms\Classes\ComponentBase;
 use October\Rain\Exception\ApplicationException;
 use RainLab\User\Facades\Auth;
+use System\Models\File;
 
 class FormData extends ComponentBase
 {
@@ -19,8 +20,6 @@ class FormData extends ComponentBase
             'description' => 'No description provided yet...'
         ];
     }
-
-
 
     public function onRun()
     {
@@ -65,6 +64,11 @@ class FormData extends ComponentBase
 
         $this->data = $data;
         $this->files = $formLog->files;
+    }
+
+    public function onRemoveFile()
+    {
+        return File::find(post('id'))->delete();
     }
 
     private function getUserOrFail()
