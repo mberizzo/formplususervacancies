@@ -62,7 +62,7 @@ class Plugin extends PluginBase
                     $log->form_data = $formData;
                     $log->save(null, post('_session_key'));
 
-                    trace_log("Updated CV data. log_id: {$log->id}. user_id: {$user->id}. New data: ", $formData);
+                    trace_log("Updated CV data. log_id: {$log->id}. user_id: {$user->id}.");
 
                     return false; // Stop creation
                 }

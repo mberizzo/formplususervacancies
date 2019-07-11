@@ -29,31 +29,22 @@ class FormData extends ComponentBase
 
         $this->addJs('assets/js/vue.js');
 
-        // The user has a form related
+        // Check if the user has not curriculum
         if (! $user->curriculum) {
-            $data = [];
-
-            $form->fields->each(function ($item) use (&$data) {
-                $data[$item->name] = [
-                    'label' => $item->label,
-                    'value' => '',
-                ];
-            });
-
-            $this->data = $data;
-
+            $this->data = $this->fillWithEmpty($form->fields);
             return;
         }
 
         $formLog = $user->curriculum->log;
         $data = $formLog->form_data;
 
-        // Rellenar $data con los fields que no han sido completados
-        // por el usuario en su cv para que vue no de error de js.
-        // @TODO: Aca tb podemos aprovechar para agregarle el v-model dinamicamente a $item
         $form->fields->each(function ($item) use ($formLog, &$data) {
+            // @TODO change this to model observer when creating form fields
+            $this->addVModelToField($item);
+
             $names = array_keys($formLog->form_data);
 
+            // @TODO: why this?
             if (! in_array($item->name, $names)) {
                 $data[$item->name] = [
                     'label' => $item->label,
@@ -91,5 +82,51 @@ class FormData extends ComponentBase
         }
 
         return $renderForm->form;
+    }
+
+    /**
+     * Fill the data with empty values
+     * To avoid js errors.
+     *
+     * @param  $fields
+     * @return
+     */
+    private function fillWithEmpty($fields)
+    {
+        $data = [];
+
+        $fields->each(function ($item) use (&$data) {
+            $data[$item->name] = [
+                'label' => $item->label,
+                'value' => '',
+            ];
+        });
+
+        return $data;
+    }
+
+    /**
+     * Add v-model to field
+     *
+     * @param $field
+     */
+    private function addVModelToField($field)
+    {
+        $notAllowed = ['submit', 'file_uploader'];
+        $type = $field->field_type->code;
+
+        if (in_array($type, $notAllowed)) {
+            return;
+        }
+
+        $vModel = 'v-model="form_data.' . $field->name . '.value"';
+
+        // @TODO: checkbox_list is not supported
+        /*if ($type == 'checkbox_list') {
+            $vModel = 'v-model="form_data.' . $field->name . '[].value"';
+        }*/
+
+        $field->custom_attributes = $vModel;
+        $field->save();
     }
 }
