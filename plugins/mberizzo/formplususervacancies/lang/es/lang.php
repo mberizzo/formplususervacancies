@@ -19,6 +19,11 @@ return [
     ],
     'settings' => [
         'job_id' => 'Vacante ID',
+        'jobs_filter' => 'Filtro',
+        'jobs_filter_description' => 'Filtro por Categoría',
+        'jobs_per_page' => 'Resultados por página',
+        'jobs_per_page_validation' => 'Ingrese un número válido.',
+
     ],
     'titles' => [
         'category' => 'Categoría',

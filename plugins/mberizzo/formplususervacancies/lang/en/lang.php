@@ -19,6 +19,10 @@ return [
     ],
     'settings' => [
         'job_id' => 'Job Identifier',
+        'jobs_filter' => 'Filter',
+        'jobs_filter_description' => 'Filter by Category',
+        'jobs_per_page' => 'Pagination',
+        'jobs_per_page_validation' => 'Enter a valid number.',
     ],
     'titles' => [
         'category' => 'Category',

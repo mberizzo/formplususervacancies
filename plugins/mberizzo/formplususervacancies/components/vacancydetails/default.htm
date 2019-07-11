@@ -1,6 +1,15 @@
 {% set job = __SELF__.vacancyDetails %}
 
 <h1>{{ job.title }}</h1>
+
+{% if job.category %}
+    <h4>{{ job.category.name }}</h4>
+{% endif %}
+
+{% if job.tags %}
+    <p><small>Tags: {{ job.tags }}</small></p>
+{% endif %}
+
 {{ job.description|raw }}
 
 {% if user %}

@@ -1,7 +1,16 @@
 {% if vacancyList | length > 0 %}
     <ul>
         {% for job in vacancyList %}
-            <li><a href="{{ 'vacancyDetails'|page({slug: job.slug}) }}">{{ job.title }}</a></li>
+            <li>
+                <a href="{{ 'vacancyDetails'|page({slug: job.slug}) }}">
+                    {{ job.title }}
+                    {% if job.category %}
+                        - {{ job.category.name }}
+                    {% endif %}
+                </a>
+            </li>
         {% endfor %}
     </ul>
+
+    {{ vacancyList.render|raw }}
 {% endif %}
