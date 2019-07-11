@@ -1,37 +1,53 @@
 {% set job = __SELF__.vacancyDetails %}
+{% set rJobs = __SELF__.relatedList %}
 
-<h1>{{ job.title }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <h1>{{ job.title }}</h1>
 
-{% if job.category %}
-    <h4>{{ job.category.name }}</h4>
-{% endif %}
-
-{% if job.tags %}
-    <p><small>Tags: {{ job.tags }}</small></p>
-{% endif %}
-
-{{ job.description|raw }}
-
-{% if user %}
-
-    <div id="wrapper-action">
-        {% if not ifUserHasAlreadyApplied %}
-            <a
-                href="#"
-                data-request="{{ __SELF__ }}::onApply"
-                data-request-update="'{{ __SELF__ }}::message': '#wrapper-action'"
-                class="btn btn-default">
-                    Aplicar
-            </a>
-        {% else %}
-            {% partial "@message" %}
+        {% if job.category %}
+            <h4>{{ job.category.name }}</h4>
         {% endif %}
+
+        {% if job.tags %}
+            <p><small>Tags: {{ job.tags }}</small></p>
+        {% endif %}
+
+        {{ job.description|raw }}
+
+        {% if user %}
+
+            <div id="wrapper-action">
+                {% if not ifUserHasAlreadyApplied %}
+                    <a
+                        href="#"
+                        data-request="{{ __SELF__ }}::onApply"
+                        data-request-update="'{{ __SELF__ }}::message': '#wrapper-action'"
+                        class="btn btn-default">
+                            Aplicar
+                    </a>
+                {% else %}
+                    {% partial "@message" %}
+                {% endif %}
+            </div>
+
+        {% else %}
+
+            <a href="{{ 'login'|page }}" class="btn btn-default">
+                Aplicar
+            </a>
+
+        {% endif %}
+
     </div>
 
-{% else %}
-
-    <a href="{{ 'login'|page }}" class="btn btn-default">
-        Aplicar
-    </a>
-
-{% endif %}
+    <div class="col-md-4">
+        {% if rJobs|length > 0 %}
+            <ul>
+                {% for related in rJobs %}
+                    <li>{{ related.title }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>

@@ -23,6 +23,7 @@ return [
         'jobs_filter_description' => 'Filter by Category',
         'jobs_per_page' => 'Pagination',
         'jobs_per_page_validation' => 'Enter a valid number.',
+        'jobs_related_limit' => 'Related limit',
     ],
     'titles' => [
         'category' => 'Category',

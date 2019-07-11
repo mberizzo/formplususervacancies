@@ -23,6 +23,7 @@ return [
         'jobs_filter_description' => 'Filtro por Categoría',
         'jobs_per_page' => 'Resultados por página',
         'jobs_per_page_validation' => 'Ingrese un número válido.',
+        'jobs_related_limit' => 'Cant. de ofertas relacionadas',
 
     ],
     'titles' => [
