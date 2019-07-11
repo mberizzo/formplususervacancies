@@ -22,7 +22,7 @@ class Job extends Model
      * Disable timestamps by default.
      * Remove this line if timestamps are defined in the database table.
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     public $attachOne = [
         'image' => 'System\Models\File'

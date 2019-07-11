@@ -24,3 +24,9 @@
 1.0.9:
     - 'Updated table mberizzo_formplususervacancies_categories'
     - builder_table_update_mberizzo_formplususervacancies_categories.php
+1.0.10:
+    - 'Updated table mberizzo_formplususervacancies_jobs'
+    - builder_table_update_mberizzo_formplususervacancies_jobs_3.php
+1.0.11:
+    - 'Categories Seeders'
+    - seeders_categories_and_jobs_timestamps.php
