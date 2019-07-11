@@ -55,6 +55,10 @@ class VacancyList extends ComponentBase
             });
         }
 
+        if ($tag = get('tag', false)) {
+            $job = $job->where('tags', 'like', "%{$tag}%");
+        }
+
         $perPage = $this->property('perPage');
 
         return $job->orderBy('id', 'desc')->paginate($perPage);

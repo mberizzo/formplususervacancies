@@ -5,14 +5,23 @@
     <div class="col-md-8">
         <h1>{{ job.title }}</h1>
 
+        <!-- Category -->
         {% if job.category %}
             <h4>{{ job.category.name }}</h4>
         {% endif %}
 
+        <!-- Tags: -->
         {% if job.tags %}
-            <p><small>Tags: {{ job.tags }}</small></p>
+            {% set tags = job.tags|split(',') %}
+            <ul class="list-unstyled list-inline">
+                {% for tag in tags %}
+                    <li><a href="#">{{ tag }}</a></li>
+                    <!-- Example link: <li><a href="{{ 'myListPage'|page }}?tag={{ tag }}">{{ tag }}</a></li> -->
+                {% endfor %}
+            </ul>
         {% endif %}
 
+        <!-- Description -->
         {{ job.description|raw }}
 
         {% if user %}
