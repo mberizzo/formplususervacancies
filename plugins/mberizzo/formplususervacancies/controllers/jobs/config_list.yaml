@@ -1,4 +1,4 @@
-title: 'mberizzo.formplususervacancies::lang.plugin.name'
+title: 'mberizzo.formplususervacancies::lang.titles.jobs'
 modelClass: Mberizzo\FormPlusUserVacancies\Models\Job
 list: $/mberizzo/formplususervacancies/models/job/columns.yaml
 recordUrl: 'mberizzo/formplususervacancies/jobs/update/:id'

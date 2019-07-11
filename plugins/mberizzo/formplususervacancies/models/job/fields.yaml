@@ -10,11 +10,11 @@ fields:
         span: left
         type: text
     category:
-        label: 'Categoria'
+        label: 'mberizzo.formplususervacancies::lang.labels.category'
         span: left
         type: relation
     tags:
-        label: 'Tags'
+        label: 'mberizzo.formplususervacancies::lang.labels.tags'
         span: left
         type: taglist
         # separator: space
@@ -27,6 +27,6 @@ tabs:
 secondaryTabs:
     fields:
         image:
-            label: 'Image'
+            label: 'mberizzo.formplususervacancies::lang.labels.image'
             type: fileupload
             mode: image

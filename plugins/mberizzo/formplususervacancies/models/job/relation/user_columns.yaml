@@ -1,16 +1,16 @@
 columns:
     name:
-        label: 'Nombre'
+        label: 'mberizzo.formplususervacancies::lang.labels.name'
         type: text
         searchable: true
         sortable: true
     created_at:
-        label: 'Fecha'
+        label: 'mberizzo.formplususervacancies::lang.labels.date'
         type: text
         searchable: true
         sortable: true
     actions:
-        label: Actions
+        label: 'mberizzo.formplususervacancies::lang.labels.actions'
         type: partial
         path: ~/plugins/mberizzo/formplususervacancies/models/users/_btn_open_details.htm
         clickable: false

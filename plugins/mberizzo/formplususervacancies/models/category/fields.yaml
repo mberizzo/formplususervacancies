@@ -1,5 +1,5 @@
 fields:
     name:
-        label: Name
+        label: 'mberizzo.formplususervacancies::lang.labels.name'
         span: full
         type: text

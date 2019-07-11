@@ -1,6 +1,10 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('mberizzo/formplususervacancies/categories') ?>">Categories</a></li>
+        <li>
+            <a href="<?= Backend::url('mberizzo/formplususervacancies/categories') ?>">
+                <?= trans('mberizzo.formplususervacancies::lang.titles.categories') ?>
+            </a>
+        </li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>

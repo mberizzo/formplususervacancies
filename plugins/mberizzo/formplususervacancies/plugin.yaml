@@ -2,33 +2,33 @@ plugin:
     name: 'mberizzo.formplususervacancies::lang.plugin.name'
     description: 'mberizzo.formplususervacancies::lang.plugin.description'
     author: MBerizzo
-    icon: oc-icon-adjust
+    icon: oc-icon-briefcase
     homepage: ''
 permissions:
     mberizzo.jobs:
-        tab: 'Jobs'
-        label: 'Jobs label'
+        tab: 'mberizzo.formplususervacancies::lang.plugin.name'
+        label: 'mberizzo.formplususervacancies::lang.plugin.description'
 navigation:
     main-menu-item:
         label: 'mberizzo.formplususervacancies::lang.plugin.name'
         url: mberizzo/formplususervacancies/jobs
-        icon: icon-life-ring
+        icon: icon-briefcase
         sideMenu:
             create_job:
-                label: 'Create Job Offer'
+                label: 'backend::lang.form.create'
                 url: mberizzo/formplususervacancies/jobs/create
                 icon: icon-plus
                 permissions:
                     - mberizzo.jobs
             jobs:
-                label: 'Listado'
+                label: 'mberizzo.formplususervacancies::lang.plugin.name'
                 url: mberizzo/formplususervacancies/jobs
-                icon: icon-th-large
+                icon: icon-briefcase
                 permissions:
                     - mberizzo.jobs
             categories:
-                label: 'Categorias'
+                label: 'mberizzo.formplususervacancies::lang.titles.categories'
                 url: mberizzo/formplususervacancies/categories
-                icon: icon-th-large
+                icon: icon-list
                 permissions:
                     - mberizzo.jobs

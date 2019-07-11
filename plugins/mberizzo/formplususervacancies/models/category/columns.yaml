@@ -1,11 +1,11 @@
 columns:
     id:
-        label: id
+        label: mberizzo.formplususervacancies::lang.labels.id
         type: number
         searchable: true
         sortable: true
     name:
-        label: Name
+        label: mberizzo.formplususervacancies::lang.labels.name
         type: text
         searchable: true
         sortable: true

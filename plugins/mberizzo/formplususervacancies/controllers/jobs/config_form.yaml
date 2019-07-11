@@ -1,4 +1,4 @@
-name: Jobs
+name: 'mberizzo.formplususervacancies::lang.titles.jobs'
 form: $/mberizzo/formplususervacancies/models/job/fields.yaml
 modelClass: Mberizzo\FormPlusUserVacancies\Models\Job
 defaultRedirect: mberizzo/formplususervacancies/jobs

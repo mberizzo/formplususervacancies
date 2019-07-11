@@ -1,6 +1,6 @@
 list: $/mberizzo/formplususervacancies/models/category/columns.yaml
 modelClass: Mberizzo\FormPlusUserVacancies\Models\Category
-title: Categories
+title: mberizzo.formplususervacancies::lang.titles.categories
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true

@@ -1,4 +1,4 @@
-name: Categories
+name: mberizzo.formplususervacancies::lang.titles.category
 form: $/mberizzo/formplususervacancies/models/category/fields.yaml
 modelClass: Mberizzo\FormPlusUserVacancies\Models\Category
 defaultRedirect: mberizzo/formplususervacancies/categories

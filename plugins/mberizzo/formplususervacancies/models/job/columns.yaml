@@ -1,17 +1,22 @@
 columns:
+    id:
+        label: 'mberizzo.formplususervacancies::lang.labels.id'
+        type: text
+        searchable: true
+        sortable: true
     title:
         label: 'mberizzo.formplususervacancies::lang.labels.title'
         type: text
         searchable: true
         sortable: true
     category:
-        label: 'Category'
+        label: 'mberizzo.formplususervacancies::lang.labels.category'
         relation: category
         valueFrom: name
         searchable: true
         sortable: true
     tags:
-        label: 'Tags'
+        label: 'mberizzo.formplususervacancies::lang.labels.tags'
         type: text
         searchable: true
     # users_count:
