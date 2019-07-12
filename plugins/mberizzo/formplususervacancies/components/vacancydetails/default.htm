@@ -28,13 +28,20 @@
 
             <div id="wrapper-action">
                 {% if not ifUserHasAlreadyApplied %}
-                    <a
-                        href="#"
-                        data-request="{{ __SELF__ }}::onApply"
-                        data-request-update="'{{ __SELF__ }}::message': '#wrapper-action'"
-                        class="btn btn-default">
-                            Aplicar
-                    </a>
+                    {% if user.curriculum %}
+                        <a
+                            href="#"
+                            data-request="{{ __SELF__ }}::onApply"
+                            data-request-error="vacancyDetailsOnError(this, context, textStatus, jqXHR)"
+                            data-request-update="'{{ __SELF__ }}::message': '#wrapper-action'"
+                            class="btn btn-default">
+                                Aplicar
+                        </a>
+                    {% else %}
+                        <a href="#" class="btn btn-default">
+                            Cargar Curriculum
+                        </a>
+                    {% endif %}
                 {% else %}
                     {% partial "@message" %}
                 {% endif %}

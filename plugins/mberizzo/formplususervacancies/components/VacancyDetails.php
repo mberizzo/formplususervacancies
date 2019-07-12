@@ -42,6 +42,7 @@ class VacancyDetails extends ComponentBase
 
     public function onRun()
     {
+        $this->addJs('assets/js/main.js');
         $this->vacancyDetails = $this->page['vacancyDetails'] = $this->getJob();
         $this->ifUserHasAlreadyApplied = $this->page['ifUserHasAlreadyApplied'] = $this->ifUserHasAlreadyApplied();
         $this->relatedList = $this->page['relatedList'] = $this->getRelatedJobs();
@@ -59,9 +60,18 @@ class VacancyDetails extends ComponentBase
 
     public function onApply()
     {
+        $user = Auth::getUser();
+
+        // First of all detect if has CV
+        if (! $user->curriculum) {
+            throw new \AjaxException([
+                'error' => 'You should save your Curriculum.',
+            ]);
+        }
+
         JobUser::firstOrCreate([
             'job_id' => $this->getJob()->id,
-            'user_id' => Auth::getUser()->id,
+            'user_id' => $user->id,
         ]);
     }
 
