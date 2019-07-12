@@ -1,7 +1,7 @@
 {% put scripts %}
 <script>
     new Vue({
-        el: '#curriculum',
+        el: '#{{ formData.form.code }}',
         data: {
             form_data: {{ formData.data|json_encode|raw }},
         },

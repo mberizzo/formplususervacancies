@@ -12,6 +12,7 @@ class FormData extends ComponentBase
 
     public $data;
     public $files;
+    public $form;
 
     public function componentDetails()
     {
@@ -55,6 +56,7 @@ class FormData extends ComponentBase
 
         $this->data = $data;
         $this->files = $formLog->files;
+        $this->form = $form;
     }
 
     public function onRemoveFile()
