@@ -26,7 +26,7 @@ class FormData extends ComponentBase
     {
         $user = $this->getUserOrFail();
 
-        $form = $this->getPageFormOrFail();
+        $this->form = $form = $this->getPageFormOrFail();
 
         $this->addJs('assets/js/vue.js');
 
@@ -56,7 +56,6 @@ class FormData extends ComponentBase
 
         $this->data = $data;
         $this->files = $formLog->files;
-        $this->form = $form;
     }
 
     public function onRemoveFile()
