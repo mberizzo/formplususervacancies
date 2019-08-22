@@ -34,7 +34,11 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::listen('eloquent.creating: ' . FormLog::class, function ($data) {
-            logger('eloquent.creating');
+            if (! Auth::check()) {
+                return;
+            }
+
+            logger('eloquent.creating with user in session');
 
             // @TODO: Improve this comment or delete it (for now is useful):
             // El user puede estar relacionado con un solo CV,
