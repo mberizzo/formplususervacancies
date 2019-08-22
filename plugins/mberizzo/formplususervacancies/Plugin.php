@@ -94,7 +94,11 @@ class Plugin extends PluginBase
 
         FormLog::extend(function($model) {
             $model->bindEvent('model.afterCreate', function() use ($model) {
-                trace_log('model.afterCreate');
+                if (! Auth::check()) {
+                    return;
+                }
+
+                trace_log('model.afterCreate with user in session');
 
                 $user = Auth::getUser();
 
