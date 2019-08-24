@@ -74,7 +74,10 @@ class Plugin extends PluginBase
         });
 
         Event::listen('formBuilder.beforeSendMessage', function ($form, $data, $files) {
-            return true; // Avoid send email
+            // Avoid send email
+            if (post('is_curriculum')) {
+                return true;
+            }
         });
 
         // @TODO: maybe we can improve this relationship
