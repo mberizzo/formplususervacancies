@@ -74,10 +74,10 @@ class Plugin extends PluginBase
         });
 
         Event::listen('formBuilder.beforeSendMessage', function ($form, $data, $files) {
-            // Avoid send email
-            if (post('is_curriculum')) {
+            // Avoid send email just on the cv form:
+            /*if (post('is_curriculum')) {
                 return true;
-            }
+            }*/
         });
 
         // @TODO: maybe we can improve this relationship
