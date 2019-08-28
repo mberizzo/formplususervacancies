@@ -3,6 +3,7 @@
 namespace Mberizzo\FormPlusUserVacancies\Components;
 
 use Cms\Classes\ComponentBase;
+use Illuminate\Support\Facades\Event;
 use Mberizzo\FormPlusUserVacancies\Models\Job;
 use Mberizzo\FormPlusUserVacancies\Models\JobUser;
 use RainLab\User\Facades\Auth;
@@ -69,10 +70,14 @@ class VacancyDetails extends ComponentBase
             ]);
         }
 
+        $job = $this->getJob();
+
         JobUser::firstOrCreate([
-            'job_id' => $this->getJob()->id,
+            'job_id' => $job->id,
             'user_id' => $user->id,
         ]);
+
+        Event::fire('mberizzo.formplususervacancies.userAppliedToJob', [$user, $job]);
     }
 
     private function getJob()
